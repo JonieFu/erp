@@ -17,7 +17,7 @@
           ></el-col>
           <el-col :span="3">
             <el-button type="primary" size="small">搜索</el-button>
-            <el-button type="warning" size="small" @click="reset"
+            <el-button type="warning" size="mini" @click="reset"
               >重置</el-button
             >
           </el-col>
@@ -31,7 +31,7 @@
             >
           </el-col>
           <el-col :span="1">
-            <el-button type="primary" size="mini" @click="modifyBOM"
+            <el-button type="success" size="mini" @click="modifyBOM"
               >修改</el-button
             >
           </el-col>

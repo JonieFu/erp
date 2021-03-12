@@ -9,24 +9,26 @@
       <el-form ref="searcDicthRef" :model="SearchForm" size="small">
         <el-row :gutter="10">
           <el-col :span="4"
-            ><el-form-item label="字典名称" label-width="70px" prop="dictName"
-              ><el-input v-model="SearchForm.dictName"></el-input></el-form-item
-          ></el-col>
-          <el-col :span="4"
-            ><el-form-item label="字典类型" label-width="70px" prop="dictType"
-              ><el-input v-model="SearchForm.dictType"></el-input></el-form-item
-          ></el-col>
-          <el-col :span="4"
-            ><el-form-item label="字典状态" label-width="70px" prop="dictStatus"
+            ><el-form-item label="字典名称" label-width="70px" prop="字典名称"
               ><el-input
-                v-model="SearchForm.dictStatus"
+                v-model="SearchForm['字典名称']"
               ></el-input></el-form-item
           ></el-col>
+          <el-col :span="4"
+            ><el-form-item label="字典类型" label-width="70px" prop="字典类型"
+              ><el-input
+                v-model="SearchForm['字典类型']"
+              ></el-input></el-form-item
+          ></el-col>
+          <el-col :span="4"
+            ><el-form-item label="状态" label-width="70px" prop="状态"
+              ><el-input v-model="SearchForm['状态']"></el-input></el-form-item
+          ></el-col>
           <el-col :span="5"
-            ><el-form-item label="创建时间" label-width="70px" prop="dictTime">
+            ><el-form-item label="创建时间" label-width="70px" prop="创建时间">
               <el-date-picker
                 style="width: 240px"
-                v-model="SearchForm.dictTime"
+                v-model="SearchForm['创建时间']"
                 type="daterange"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
@@ -35,10 +37,10 @@
               </el-date-picker> </el-form-item
           ></el-col>
           <el-col :span="3">
-            <el-button type="primary" size="small" @click="search"
+            <el-button type="primary" size="mini" @click="search"
               >搜索</el-button
             >
-            <el-button type="warning" size="small" @click="reset"
+            <el-button type="warning" size="mini" @click="reset"
               >重置</el-button
             >
           </el-col>
@@ -52,7 +54,7 @@
             >
           </el-col>
           <el-col :span="1">
-            <el-button type="primary" size="mini" @click="modifyDict"
+            <el-button type="success" size="mini" @click="modifyDict"
               >修改</el-button
             >
           </el-col>
@@ -77,34 +79,10 @@
           <el-table-column align="center" type="selection"></el-table-column>
           <el-table-column
             align="center"
-            prop="dictNum"
-            label="字典主键"
-          ></el-table-column>
-          <el-table-column
-            align="center"
-            prop="dictName"
-            label="字典名称"
-          ></el-table-column>
-          <el-table-column
-            align="center"
-            prop="dictType"
-            label="字典类型"
-          ></el-table-column>
-          <el-table-column align="center" prop="dictStatus" label="状态">
-            <template slot-scope="{ row }">
-              <el-tag v-if="row.dictStatus === 1"> 正常</el-tag>
-              <el-tag v-if="row.dictStatus === 0" type="info"> 不正常</el-tag>
-            </template></el-table-column
-          >
-          <el-table-column
-            align="center"
-            prop="Note"
-            label="备注"
-          ></el-table-column>
-          <el-table-column
-            align="center"
-            prop="dictTime"
-            label="创建时间"
+            v-for="(value, key) in tableTitle"
+            :label="value"
+            :prop="value"
+            :key="key"
           ></el-table-column>
           <el-table-column align="center" label="操作" width="300px">
             <template slot-scope="{ row, $index }">
@@ -149,51 +127,26 @@
     >
       <div class="el-dialog-div">
         <el-form
-          ref="form"
+          ref="addform"
           :model="adddictlist"
           label-width="150px"
           size="small"
         >
-          <el-form-item label="字典主键"
+          <el-form-item
+            v-for="(value, key) in tableTitle"
+            :label="value"
+            :prop="value"
+            :key="key"
             ><el-input
               style="width: 90%"
-              v-model="adddictlist.dictNum"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="字典名称"
-            ><el-input
-              style="width: 90%"
-              v-model="adddictlist.dictName"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="字典类型"
-            ><el-input
-              style="width: 90%"
-              v-model="adddictlist.dictType"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="状态"
-            ><el-input
-              style="width: 90%"
-              v-model="adddictlist.dictStatus"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="备注"
-            ><el-input
-              style="width: 90%"
-              v-model="adddictlist.Note"
-            ></el-input> </el-form-item
-          ><el-form-item label="创建时间"
-            ><el-input
-              style="width: 90%"
-              v-model="adddictlist.dictNum"
+              v-model="adddictlist[value]"
             ></el-input>
           </el-form-item>
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addBomDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submit">确 定</el-button>
+        <el-button @click="addDictDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addSubmit">确 定</el-button>
       </span>
     </el-dialog>
     <el-dialog
@@ -208,39 +161,14 @@
           label-width="150px"
           size="small"
         >
-          <el-form-item label="字典主键"
+          <el-form-item
+            v-for="(value, key) in tableTitle"
+            :label="value"
+            :prop="value"
+            :key="key"
             ><el-input
               style="width: 90%"
               v-model="editdictlist.dictNum"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="字典名称"
-            ><el-input
-              style="width: 90%"
-              v-model="editdictlist.dictName"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="字典类型"
-            ><el-input
-              style="width: 90%"
-              v-model="editdictlist.dictType"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="状态"
-            ><el-input
-              style="width: 90%"
-              v-model="editdictlist.dictStatus"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="备注"
-            ><el-input
-              style="width: 90%"
-              v-model="editdictlist.Note"
-            ></el-input> </el-form-item
-          ><el-form-item label="创建时间"
-            ><el-input
-              style="width: 90%"
-              v-model="editdictlist.dictTime"
             ></el-input>
           </el-form-item>
         </el-form>
@@ -258,53 +186,56 @@ export default {
   components: { Export },
   data() {
     return {
-      SearchForm: {
-        dictName: '',
-        dictType: '',
-        dictStatus: '',
-        dictTime: [],
-      },
-      tableList: [
-        {
-          dictNum: '1',
-          dictName: '用户性别',
-          dictType: 'sys_user_sex',
-          dictStatus: 1,
-          Note: '用户性别列表',
-          dictTime: '2020-12-23',
-        },
-      ],
       tableTitle: [
-        { label: '字典主键', prop: 'dictNum' },
-        { label: '字典名称', prop: 'dictName' },
-        { label: '字典类型', prop: 'dictType' },
-        { label: '状态', prop: `dictStatus` },
-        { label: '备注', prop: 'Note' },
-        { label: '创建时间', prop: 'dictTime' },
+        '字典编号',
+        '字典名称',
+        '字典类型',
+        '状态',
+        '备注',
+        '创建时间',
       ],
+      SearchForm: {
+        字典名称: '',
+        字典类型: '',
+        状态: '',
+        创建时间: [],
+      },
+      tableList: [],
       adddictlist: {
-        dictNum: '',
-        dictName: '',
-        dictType: '',
-        dictStatus: '',
-        Note: '',
-        dictTime: '',
+        字典编号: '',
+        字典名称: '',
+        字典类型: '',
+        状态: '',
+        备注: '',
+        创建时间: '',
       },
       currentPage: 1,
       addDictDialogVisible: false,
       editDictDialogVisible: false,
       tableAmountData: [],
       editdictlist: {
-        dictNum: '',
-        dictName: '',
-        dictType: '',
-        dictStatus: '',
-        Note: '',
-        dictTime: '',
+        字典编号: '',
+        字典名称: '',
+        字典类型: '',
+        状态: '',
+        备注: '',
+        创建时间: '',
       },
     }
   },
   created() {},
+  mounted() {
+    this.tableList = [
+      {
+        字典编号: '1',
+        字典名称: '用户性别',
+        字典类型: 'sys_user_sex',
+        状态: '正常',
+        备注: '用户性别列表',
+        创建时间: '2021-03-05 14:10:06',
+      },
+    ]
+  },
   methods: {
     liebiao(row) {
       this.$router.push({
@@ -315,39 +246,11 @@ export default {
         },
       })
     },
-    exportData() {
-      if (this.tableAmountData.length === 0) {
-        this.$message({
-          message: '请选择要导出数据',
-          type: 'warning',
-        })
-        return
-      } else {
-        let allColumns = this.tableTitle
-        var columnNames = []
-        var columnValues = []
-        for (var i = 0; i < allColumns.length; i++) {
-          columnNames[i] = allColumns[i].label
-          columnValues[i] = allColumns[i].prop
-        }
-        require.ensure([], () => {
-          const {
-            export_json_to_excel,
-          } = require('../../vendor/Export2Excel.js')
-          const tHeader = columnNames
-          const filterVal = columnValues
-          const list = this.tableAmountData
-          const data = this.formatJson(filterVal, list)
-          export_json_to_excel(tHeader, data, '字典设置')
-        })
-      }
-    },
+
     handleSelectionChange(val) {
       this.tableAmountData = val
     },
-    formatJson(filterVal, jsonData) {
-      return jsonData.map((v) => filterVal.map((j) => v[j]))
-    },
+
     modifyDict() {
       if (this.tableAmountData.length === 0) {
         return
@@ -361,7 +264,10 @@ export default {
         return this.tableAmountData.indexOf(item) === -1
       })
     },
-    submit() {},
+    addSubmit() {
+      this.addDictDialogVisible = false
+      this.$refs.addform.resetFields()
+    },
     edit(data) {
       console.log(data)
       this.editdictlist = data

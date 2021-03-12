@@ -2,8 +2,8 @@
   <div class="export">
     <el-button
       style="margin-left: 24px"
-      type="primary"
       size="mini"
+      type="warning"
       @click="exportData"
     >
       导出

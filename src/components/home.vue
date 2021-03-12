@@ -20,15 +20,20 @@
           :default-active="activePath"
           router
         >
+          <el-menu-item index="/welcome">
+            <i :class="iconsObj[0]"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
           <el-submenu
-            :index="item.id + ''"
             v-for="item in menulist"
+            :index="item.id + ''"
             :key="item.id"
           >
             <template slot="title">
               <i :class="iconsObj[item.id]"></i>
               <span slot="title">{{ item.authName }}</span>
             </template>
+
             <el-menu-item
               :index="'/' + item2.path"
               v-for="item2 in item.children"
@@ -141,6 +146,7 @@ export default {
         // },
       ],
       iconsObj: {
+        0: 'iconfont icon-index',
         1: 'iconfont icon-xitongguanli',
         11: 'iconfont icon-gongsiguanli',
         12: 'iconfont icon-bumenguanli',

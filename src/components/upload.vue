@@ -13,7 +13,7 @@
       accept=".xlsx,.xls"
       :on-exceed="handleExceed"
     >
-      <el-button size="mini" type="primary">{{ title }}</el-button>
+      <el-button size="mini" type="info">{{ title }}</el-button>
     </el-upload>
   </div>
 </template>

@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 
 // 后端请求的配置, 等后端写好接口后再写
 Vue.prototype.$http = axios
-axios.defaults.baseURL = "https://www.liulongbin.top:8888/api/private/v1"
+axios.defaults.baseURL = "http://172.16.7.166:80"
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
