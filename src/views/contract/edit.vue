@@ -18,7 +18,7 @@
           <el-input :placeholder="value"></el-input></el-form-item
       ></el-form>
 
-      <el-row>
+      <el-row :gutter="60">
         <el-col :span="1"
           ><router-link
             :to="{
@@ -37,7 +37,9 @@
             ></router-link
           ></el-col
         >
-        <el-col :span="1"><Upload title="上传附件"></Upload></el-col>
+        <el-col :span="1"
+          ><Upload class="upload" title="上传附件"></Upload
+        ></el-col>
       </el-row>
     </el-card>
   </div>
@@ -78,4 +80,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+::v-deep .upload button {
+  height: 32px;
+}
 </style>

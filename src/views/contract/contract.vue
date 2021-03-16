@@ -6,29 +6,45 @@
       <el-breadcrumb-item>合同管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-form size="small" :model="searchInput" label-width="100px">
+      <el-form size="mini" :model="searchInput">
         <el-row :gutter="10">
           <el-col :span="5">
-            <el-form-item label="商务合同编号">
-              <el-input v-model="searchInput['上午合同编号']"></el-input>
+            <el-form-item
+              label="商务合同编号"
+              label-width="90px"
+              class="fontSize"
+            >
+              <el-input v-model="searchInput['商务合同编号']"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
-            <el-form-item label="合同编号">
+          <el-col :span="4">
+            <el-form-item label="合同编号" label-width="60px" class="fontSize">
               <el-input v-model="searchInput['合同编号']"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="5">
-            <el-form-item label="合同名称">
+          <el-col :span="4">
+            <el-form-item label="合同名称" label-width="60px" class="fontSize">
               <el-input
                 v-model="searchInput['合同名称']"
                 placeholder=""
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
-            <el-button type="primary" size="small">搜索</el-button>
-            <el-button type="primary" size="small"
+          <el-col :span="4">
+            <el-form-item label="创建时间" label-width="60px" class="fontSize"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="searchInput['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker></el-form-item
+          ></el-col>
+          <el-col :span="4" style="margin-left: 110px">
+            <el-button type="primary" size="mini">搜索</el-button>
+            <el-button type="primary" size="mini"
               ><router-link :to="{ name: 'ContractAdd' }" class="add"
                 >新增</router-link
               ></el-button
@@ -116,11 +132,12 @@ export default {
         商务合同编号: '',
         合同编号: '',
         合同名称: '',
+        创建时间: [],
       },
       tableTitle: [
         '商务合同编号',
         '合同编号',
-        '中标批次',
+        '招标批次',
         '招标单位',
         '合同甲方单位',
         '中标时间',
@@ -191,7 +208,7 @@ export default {
   },
   methods: {
     async removeRow(index, row) {
-      const confirmResult = await this.$confirm('是否导入此文件？', '提示', {
+      const confirmResult = await this.$confirm('是否删除此文件？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
@@ -220,5 +237,10 @@ export default {
 .add {
   text-decoration: none;
   color: white;
+}
+.fontSize {
+  ::v-deep .el-form-item__label {
+    font-size: 12px;
+  }
 }
 </style>

@@ -83,7 +83,11 @@ export default {
           authName: '业务模块',
           id: 3,
           children: [
-            { authName: '合同管理', id: 31, path: 'contract' },
+            {
+              authName: '合同管理',
+              id: 31,
+              path: 'contract',
+            },
             { authName: '子合同管理', id: 32, path: 'sales_order' },
             { authName: '采购单', id: 33, path: 'purchas_order' },
             { authName: '退货单', id: 34, path: 'return_order' },

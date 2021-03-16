@@ -6,10 +6,15 @@
       <el-breadcrumb-item>物料入库</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card
-      ><el-form ref="libraryForm" :model="SearchForm" size="small">
+      ><el-form
+        ref="libraryForm"
+        :model="SearchForm"
+        size="mini"
+        class="fontSize"
+      >
         <el-row :gutter="10">
           <el-col :span="4"
-            ><el-form-item label="入库单号" label-width="70px" prop="入库单号"
+            ><el-form-item label="入库单号" label-width="65px" prop="入库单号"
               ><el-input
                 v-model="SearchForm['入库单号']"
               ></el-input></el-form-item
@@ -17,7 +22,7 @@
           <el-col :span="4"
             ><el-form-item
               label="入库单名称"
-              label-width="90px"
+              label-width="75px"
               prop="入库单名称"
               ><el-input
                 v-model="SearchForm['入库单名称']"
@@ -26,33 +31,38 @@
           <el-col :span="4"
             ><el-form-item
               label="采购订单编号"
-              label-width="100px"
+              label-width="85px"
               prop="采购订单编号"
               ><el-input
                 v-model="SearchForm['采购订单编号']"
               ></el-input></el-form-item
           ></el-col>
-          <el-col :span="4"
-            ><el-form-item
-              label="采购订单名称"
-              label-width="100px"
-              prop="采购订单名称"
-              ><el-input
-                v-model="SearchForm['采购订单名称']"
-              ></el-input></el-form-item
-          ></el-col>
-          <el-col :span="3">
-            <el-button type="primary" size="small" @click="search"
+
+          <el-col :span="6">
+            <el-form-item label="创建时间" label-width="60px" class="fontSize"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="SearchForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="4" style="margin-left: 30px">
+            <el-button type="primary" size="mini" @click="search"
               >搜索</el-button
             >
-            <el-button type="warning" size="small" @click="reset"
+            <el-button type="warning" size="mini" @click="reset"
               >重置</el-button
             >
           </el-col>
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addlibrary"
               >添加</el-button
@@ -360,6 +370,11 @@ export default {
   margin: auto;
   .el-input {
     width: 90%;
+  }
+}
+.fontSize {
+  ::v-deep .el-form-item__label {
+    font-size: 12px;
   }
 }
 </style>

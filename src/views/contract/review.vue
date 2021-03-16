@@ -20,7 +20,7 @@
             :disabled="true"
           ></el-input></el-form-item
       ></el-form>
-      <el-row>
+      <el-row :gutter="60">
         <el-col :span="1">
           <router-link
             :to="{
@@ -94,6 +94,11 @@ export default {
   },
   created() {},
   mounted() {
+    if (window.PerformanceNavigation.type === 1) {
+      console.log('页面被刷新')
+    } else {
+      console.log('页面首次被加载')
+    }
     this.contractIndex = this.$route.params.contractIndex
     this.contractMessage = this.$route.params.data
   },

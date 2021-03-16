@@ -6,28 +6,33 @@
       <el-breadcrumb-item>字典设置</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-form ref="searcDicthRef" :model="SearchForm" size="small">
+      <el-form
+        ref="searcDicthRef"
+        :model="SearchForm"
+        size="mini"
+        class="fontSize"
+      >
         <el-row :gutter="10">
           <el-col :span="4"
-            ><el-form-item label="字典名称" label-width="70px" prop="字典名称"
+            ><el-form-item label="字典名称" label-width="65px" prop="字典名称"
               ><el-input
                 v-model="SearchForm['字典名称']"
               ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
-            ><el-form-item label="字典类型" label-width="70px" prop="字典类型"
+            ><el-form-item label="字典类型" label-width="65px" prop="字典类型"
               ><el-input
                 v-model="SearchForm['字典类型']"
               ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
-            ><el-form-item label="状态" label-width="70px" prop="状态"
+            ><el-form-item label="状态" label-width="40px" prop="状态"
               ><el-input v-model="SearchForm['状态']"></el-input></el-form-item
           ></el-col>
-          <el-col :span="5"
-            ><el-form-item label="创建时间" label-width="70px" prop="创建时间">
+          <el-col :span="4"
+            ><el-form-item label="创建时间" label-width="65px" prop="创建时间">
               <el-date-picker
-                style="width: 240px"
+                style="width: 200px"
                 v-model="SearchForm['创建时间']"
                 type="daterange"
                 start-placeholder="开始日期"
@@ -36,7 +41,7 @@
               >
               </el-date-picker> </el-form-item
           ></el-col>
-          <el-col :span="3">
+          <el-col :span="4" style="margin-left: 110px">
             <el-button type="primary" size="mini" @click="search"
               >搜索</el-button
             >
@@ -47,7 +52,7 @@
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addDict"
               >添加</el-button
@@ -175,7 +180,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addBomDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submit">确 定</el-button>
+        <el-button type="primary" @click="editsubmit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -274,6 +279,9 @@ export default {
       console.log(this.editForm)
       this.editDictDialogVisible = true
     },
+    editsubmit() {
+      this.editDictDialogVisible = false
+    },
     remove(index) {
       this.tableList.splice(index, 1)
     },
@@ -285,7 +293,7 @@ export default {
       this.$refs.searcDicthRef.resetFields()
     },
     search() {
-      console.log(this.SearchForm)
+      console.log('hahahahhah', this.SearchForm)
     },
   },
 }
@@ -294,5 +302,10 @@ export default {
 .list {
   text-decoration: none;
   color: white;
+}
+.fontSize {
+  ::v-deep .el-form-item__label {
+    font-size: 12px;
+  }
 }
 </style>

@@ -8,22 +8,47 @@
     <el-card
       ><el-form ref="salesForm" :model="salesForm" size="small">
         <el-row :gutter="10">
-          <el-col :span="6"
+          <el-col :span="5"
             ><el-form-item
-              label="采购方总部编码"
-              label-width="110px"
-              prop="cgfzbbm"
-              ><el-input v-model="salesForm.cgfzbbm"></el-input></el-form-item
+              label="商务合同编码"
+              label-width="100px"
+              prop="商务合同编码"
+              ><el-input
+                v-model="salesForm['商务合同编码']"
+              ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
-            ><el-form-item label="子合同编号" label-width="90px" prop="zhtbh"
-              ><el-input v-model="salesForm.zhtbh"></el-input></el-form-item
+            ><el-form-item
+              label="子合同编号"
+              label-width="85px"
+              prop="子合同编号"
+              ><el-input
+                v-model="salesForm['子合同编号']"
+              ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
-            ><el-form-item label="供应商编码" label-width="90px" prop="gysbm"
-              ><el-input v-model="salesForm.gysbm"></el-input></el-form-item
+            ><el-form-item
+              label="子合同名称"
+              label-width="85px"
+              prop="子合同名称"
+              ><el-input
+                v-model="salesForm['子合同名称']"
+              ></el-input></el-form-item
           ></el-col>
-          <el-col :span="3">
+          <el-col :span="7">
+            <el-form-item label="创建时间" label-width="70px" class="fontSize"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="salesForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="4">
             <el-button type="primary" size="small" @click="search"
               >搜索</el-button
             >
@@ -34,7 +59,7 @@
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addsales"
               >添加</el-button
@@ -59,7 +84,7 @@
           </el-col>
           <el-col :span="2">
             <Upload
-              style="margin-left: 30px"
+              style="margin-left: 25px"
               :title="'导入'"
               :tableData="tableList"
               @update:tableData="updateData"
@@ -193,9 +218,10 @@ export default {
         '合同名称',
       ],
       salesForm: {
-        cgfzbbm: '',
-        zhtbh: '',
-        gysbm: '',
+        商务合同编号: '',
+        子合同编号: '',
+        子合同名称: '',
+        创建时间: [],
       },
       tableList: [],
 
@@ -270,9 +296,11 @@ export default {
       this.addSalesDialogVisible = false
     },
 
-    search() {},
+    search() {
+      console.log(this.salesForm)
+    },
     reset() {
-      this.$refs.purchasForm.resetFields()
+      this.$refs.salesForm.resetFields()
     },
   },
 }

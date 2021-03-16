@@ -6,7 +6,7 @@
       <el-breadcrumb-item>工艺路线</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-form ref="searcDicthRef" :model="SearchForm" size="small">
+      <el-form ref="searcDicthRef" :model="SearchForm" size="mini">
         <el-row :gutter="10">
           <el-col :span="4"
             ><el-form-item label="流程代号" label-width="70px" prop="dictName"
@@ -20,17 +20,29 @@
                 v-model="SearchForm['线体描述']"
               ></el-input></el-form-item
           ></el-col>
-          <el-col :span="3">
-            <el-button type="primary" size="small">搜索</el-button>
-
-            <el-button type="warning" size="small" @click="reset"
+          <el-col :span="4"
+            ><el-form-item label="创建时间" label-width="70px"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="SearchForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="4" style="margin-left: 120px">
+            <el-button type="primary" size="mini">搜索</el-button>
+            <el-button type="warning" size="mini" @click="reset"
               >重置</el-button
             >
           </el-col>
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addProcess"
               >添加</el-button
@@ -55,7 +67,7 @@
           </el-col>
           <el-col :span="1">
             <Upload
-              style="margin-left: 30px"
+              style="margin-left: 25px"
               :title="'导入'"
               :tableData="tableList"
               @update:tableData="uploadData"
@@ -266,6 +278,7 @@ export default {
       SearchForm: {
         流程代号: '',
         线体描述: '',
+        创建时间: [],
       },
       tableList: [],
       editProcessList: {

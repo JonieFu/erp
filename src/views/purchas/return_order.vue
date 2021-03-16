@@ -6,41 +6,54 @@
       <el-breadcrumb-item>退货单</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card
-      ><el-form ref="purchasForm" :model="SearchForm" size="small">
+      ><el-form ref="purchasForm" :model="purchasForm" size="small">
         <el-row :gutter="10">
           <el-col :span="4"
-            ><el-form-item label="采购单号" label-width="70px" prop="purchasNum"
+            ><el-form-item label="采购单号" label-width="70px" prop="采购单号"
               ><el-input
-                v-model="SearchForm['采购单号']"
+                v-model="purchasForm['采购单号']"
               ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
             ><el-form-item
               label="采购单名称"
-              label-width="90px"
+              label-width="85px"
               prop="采购单名称"
               ><el-input
-                v-model="SearchForm['采购单名称']"
+                v-model="purchasForm['采购单名称']"
               ></el-input></el-form-item
           ></el-col>
           <el-col :span="4"
             ><el-form-item label="BOM编号" label-width="80px" prop="BOM编号"
               ><el-input
-                v-model="SearchForm['BOM编号']"
+                v-model="purchasForm['BOM编号']"
               ></el-input></el-form-item
           ></el-col>
-          <el-col :span="3">
+          <el-col :span="7">
+            <el-form-item label="创建时间" label-width="70px" prop="创建时间"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="purchasForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="4">
             <el-button type="primary" size="small" @click="search"
               >搜索</el-button
             >
-            <el-button type="warning" size="small" @click="reset"
+            <el-button type="warning" size="small" @click="resetForm"
               >重置</el-button
             >
           </el-col>
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addReturnOrder"
               >添加</el-button
@@ -207,10 +220,11 @@ export default {
         '创建时间',
         '创建人',
       ],
-      SearchForm: {
+      purchasForm: {
         采购单号: '',
         采购单名称: '',
         BOM编号: '',
+        创建时间: [],
       },
       tableList: [],
       currentPage: 1,
@@ -322,7 +336,7 @@ export default {
       this.tableList.splice(index, 1)
     },
     search() {},
-    reset() {
+    resetForm() {
       this.$refs.purchasForm.resetFields()
     },
   },

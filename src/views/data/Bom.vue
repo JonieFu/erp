@@ -6,17 +6,36 @@
       <el-breadcrumb-item>BOM清单</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-form ref="searchRef" :model="SearchForm" size="small">
+      <el-form ref="searchRef" :model="SearchForm" size="mini">
         <el-row :gutter="10">
           <el-col
             :span="4"
             v-for="(value, key, index) in SearchForm"
             :key="index"
-            ><el-form-item :label="key" label-width="100px" :prop="key"
-              ><el-input v-model="SearchForm[key]"></el-input></el-form-item
+            ><el-form-item
+              :label="key"
+              :label-width="labelwidth(key)"
+              :prop="key"
+              class="fontSize"
+            >
+              <el-date-picker
+                v-if="key === '创建时间'"
+                style="width: 200px"
+                v-model="SearchForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker>
+              <el-input
+                v-if="key != '创建时间'"
+                v-model="SearchForm[key]"
+                size="mini"
+              ></el-input></el-form-item
           ></el-col>
-          <el-col :span="3">
-            <el-button type="primary" size="small">搜索</el-button>
+          <el-col :span="4" style="margin-left: 120px">
+            <el-button type="primary" size="mini">搜索</el-button>
             <el-button type="warning" size="mini" @click="reset"
               >重置</el-button
             >
@@ -24,7 +43,7 @@
         </el-row>
       </el-form>
       <el-card>
-        <el-row :gutter="30">
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addBOM"
               >添加</el-button
@@ -155,8 +174,7 @@ export default {
         BOM编号: '',
         销售订单编号: '',
         销售订单名称: '',
-        物料名称: '',
-        规格型号: '',
+        创建时间: [],
       },
       tableTitle: [
         'BOM编号',
@@ -198,6 +216,14 @@ export default {
   },
   created() {},
   methods: {
+    labelwidth(key) {
+      console.log('key', key)
+      if (key === '销售订单编号' || key === '销售订单名称') {
+        return '85px'
+      } else {
+        return '70px'
+      }
+    },
     uploadData(value) {
       this.tableList = value
     },
@@ -281,5 +307,10 @@ export default {
 .el-dialog-div {
   height: 500px;
   overflow: auto;
+}
+.fontSize {
+  ::v-deep .el-form-item__label {
+    font-size: 12px;
+  }
 }
 </style>

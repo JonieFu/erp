@@ -6,15 +6,28 @@
       <el-breadcrumb-item>基础数据配置</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-form :model="searchForm" label-width="60px" size="small">
+      <el-form :model="searchForm" size="small">
         <el-row :gutter="10">
-          <el-col :span="6"
-            ><el-form-item label="表名称">
+          <el-col :span="4"
+            ><el-form-item label="表名称" label-width="60px">
               <el-input
                 v-model="searchForm['表名称']"
               ></el-input> </el-form-item
           ></el-col>
-          <el-col :span="3">
+          <el-col :span="6">
+            <el-form-item label="创建时间" label-width="70px"
+              ><el-date-picker
+                style="width: 240px"
+                v-model="searchForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="3" style="margin-left: 50px">
             <el-button type="primary" icon="el-icon-search" size="small"
               >搜索</el-button
             >
@@ -22,7 +35,7 @@
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addData"
               >添加</el-button
@@ -51,7 +64,7 @@
               action="https://www.liulongbin.top:8888/api/private/v1"
               title="导入"
               :tableData="tableList"
-              style="margin-left: 30px"
+              style="margin-left: 25px"
             ></Upload>
           </el-col>
         </el-row>
@@ -167,7 +180,7 @@ export default {
   data() {
     return {
       tableTitle: ['表名称', '业务描述', '创建用户', '创建时间', '状态'],
-      searchForm: { 表名称: '' },
+      searchForm: { 表名称: '', 创建时间: [] },
       tableList: [],
       adddatalist: {
         表名称: '',

@@ -16,10 +16,12 @@ Vue.config.productionTip = false
 // 后端请求的配置, 等后端写好接口后再写
 Vue.prototype.$http = axios
 axios.defaults.baseURL = "http://172.16.7.166:80"
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8;Access-Control-Allow-Origin'
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
 })
+
 
 Vue.filter('dataFormat', function (originVal) {
   const dt = new Date(originVal)

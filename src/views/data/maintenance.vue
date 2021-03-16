@@ -37,16 +37,28 @@
           </el-pagination>
         </el-aside>
         <el-main style="height: 85vh">
-          <el-form :model="formData" label-width="80px" size="small">
+          <el-form :model="formData" label-width="60px" size="small">
             <el-row :gutter="10">
-              <el-col :span="7"
+              <el-col :span="5"
                 ><el-form-item label="表名称"
                   ><el-input
                     v-model="formData.name"
                     placeholder=""
                   ></el-input></el-form-item
               ></el-col>
-              <el-col :span="3">
+              <el-col :span="8">
+                <el-form-item label="创建时间" label-width="70px"
+                  ><el-date-picker
+                    style="width: 200px"
+                    v-model="formData.time"
+                    type="daterange"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    value-format="yyyy-MM-dd"
+                  >
+                  </el-date-picker></el-form-item
+              ></el-col>
+              <el-col :span="3" style="margin-left: 60px">
                 <el-button type="primary" icon="el-icon-search" size="small"
                   >搜索</el-button
                 >
@@ -84,7 +96,7 @@
                 {{ row.status === 1 ? '正常' : '非正常' }}</template
               >
             </el-table-column>
-            <el-table-column align="center" label="操作"
+            <el-table-column align="center" label="操作" width="120px"
               ><template
                 ><el-button
                   size="mini"
@@ -132,6 +144,7 @@ export default {
       ],
       formData: {
         name: '',
+        time: [],
       },
       tableDetails: [],
       currentPage: 1,

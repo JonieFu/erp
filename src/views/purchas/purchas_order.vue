@@ -29,7 +29,20 @@
                 v-model="SearchForm['BOM编号']"
               ></el-input></el-form-item
           ></el-col>
-          <el-col :span="3">
+          <el-col :span="7">
+            <el-form-item label="创建时间" label-width="70px" prop="创建时间"
+              ><el-date-picker
+                style="width: 200px"
+                v-model="SearchForm['创建时间']"
+                type="daterange"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+              >
+              </el-date-picker
+            ></el-form-item>
+          </el-col>
+          <el-col :span="4">
             <el-button type="primary" size="small" @click="search"
               >搜索</el-button
             >
@@ -40,7 +53,7 @@
         </el-row>
       </el-form>
       <el-card>
-        <el-row>
+        <el-row :gutter="60">
           <el-col :span="1">
             <el-button type="primary" size="mini" @click="addPurchasOrder"
               >添加</el-button
@@ -190,6 +203,7 @@ export default {
         采购单号: '',
         采购单名称: '',
         BOM编号: '',
+        创建时间: '',
       },
       tableList: [],
       tableTitle: [

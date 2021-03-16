@@ -57,7 +57,7 @@
           </el-select>
         </el-form-item>
       </el-form>
-      <el-row>
+      <el-row :gutter="60">
         <el-col :span="1"
           ><router-link
             :to="{

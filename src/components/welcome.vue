@@ -14,7 +14,9 @@ export default {
   data() {
     return {}
   },
-  created() {},
+  created() {
+    this.getData()
+  },
   mounted() {
     var app = {}
     var posList = [
@@ -192,7 +194,13 @@ export default {
     myChart2.setOption(option)
   },
 
-  methods: {},
+  methods: {
+    async getData() {
+      const res = await this.$http.get('/api/getInfo')
+      console.log('res')
+      console.log(res)
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
